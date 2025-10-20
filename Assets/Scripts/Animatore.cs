@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 public class Animatore:MonoBehaviour{
-    private string nomeOggetto;
-    private float tempo;
     private SpriteRenderer rendererOggetto;
     private Rigidbody2D rigidbodyOggetto;
     [SerializeField] private Sprite std,camminata;
@@ -11,11 +9,13 @@ public class Animatore:MonoBehaviour{
     private void Awake(){
         rigidbodyOggetto=GetComponent<Rigidbody2D>();
         rendererOggetto=GetComponent<SpriteRenderer>();
-        nomeOggetto=gameObject.name.Split()[0];                    // Toglie il numero
         StartCoroutine(Animazione());}
 
 ////////////////////////////////////////////////// ANIMAZIONE //////////////////////////////////////////////////////////
     private IEnumerator Animazione(){
+        var nomeOggetto=gameObject.name.Split()[0];                    // Toglie il numero
+        var tempo=0f;
+        
         do{
             switch(nomeOggetto){
                 case "Pianta":                // Identico comportamento

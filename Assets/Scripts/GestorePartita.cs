@@ -5,17 +5,16 @@ using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
 public class GestorePartita:MonoBehaviour{
-    private CuboOggetto cuboOggettoCollisione;
     private int monete,tempo=150;
     private static int _vite=Vite,_punti,_puntiPrecedenti;
     private AudioSource musica;
     private float posMinX,posMaxX;
     private Vector3 posCamera;
     private const float DeltaT=0.0005f,DeltaS=0.2f,DeltaCuboVuoto=0.1f;
-    private const int TempoVelocitàDoppia=50,Vite=10;
+    private const int TempoVelocitàDoppia=50,Vite=10,AltezzaMinimaVisibile=3;
     private static string _nomeLivello="Livello1";
     [SerializeField] private float hMax;
-    [SerializeField] private int terra,hSogliaTop,altezzaMinimaVisibile;
+    [SerializeField] private int terra,hSogliaTop;
     [SerializeField] private Transform posBandiera;
     [SerializeField] private Transform player,pausaPanel;
     [SerializeField] private List<CuboOggetto> cubiOggetto;
@@ -143,14 +142,14 @@ public class GestorePartita:MonoBehaviour{
         musica.Play();
 
         yield return new WaitForSecondsRealtime(0.5f);
-        if(posOggetto.y>=altezzaMinimaVisibile){
+        if(posOggetto.y>=AltezzaMinimaVisibile){
             while(posOggetto.y<h){
                 yield return new WaitForSecondsRealtime(DeltaT);           // Sale
                 posOggetto.y=player.position.y+DeltaS;
                 player.position=posOggetto;}
             
             posOggetto.z=-1;                                     // Davanti a tutto
-            while(posOggetto.y>altezzaMinimaVisibile){
+            while(posOggetto.y>AltezzaMinimaVisibile){
                 yield return new WaitForSecondsRealtime(DeltaT);               // Scende
                 posOggetto.y=player.position.y-DeltaS;
                 player.position=posOggetto;}}
@@ -186,7 +185,8 @@ public class GestorePartita:MonoBehaviour{
     
 //////////////////////////////////////////////// OGGETTI NASCOSTI //////////////////////////////////////////////////////
     public bool RilasciaOggetto(string nomeCubo){
-        cuboOggettoCollisione=cubiOggetto.FirstOrDefault(cubo=>cubo.name==nomeCubo && !cubo.GetRilasciato());
+        var cuboOggettoCollisione=cubiOggetto.FirstOrDefault(cubo=>cubo.name==nomeCubo && !cubo.GetRilasciato());
+        
         if(!cuboOggettoCollisione){
             return false;}
         

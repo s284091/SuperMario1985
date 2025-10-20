@@ -2,8 +2,9 @@
 public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsiasi oggetto mobile
     private SpriteRenderer rendererOggetto;
     private Rigidbody2D rigidbodyOggetto;
+    private const int AltezzaMinimaVisibile=3;
     [SerializeField] private SpawnerOggetti sorgente;
-    [SerializeField] private int velocità,altezzaMinimaVisibile;
+    [SerializeField] private int velocità;
     
 ////////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////
     private void Awake(){
@@ -12,10 +13,14 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
     
 //////////////////////////////////////////////////////// UPDATE ////////////////////////////////////////////////////////
     private void Update(){
+        if(!rendererOggetto.isVisible){
+            return;}
+        
         rigidbodyOggetto.linearVelocityX=rigidbodyOggetto.linearVelocityY==0? velocità : 0;
-        if(transform.position.y<altezzaMinimaVisibile){
-            sorgente.Ricarica(transform);
-            gameObject.SetActive(false);}}          // Ricaricato in lista
+        if(transform.position.y<AltezzaMinimaVisibile){          // Disattivato
+            gameObject.SetActive(false);
+            if(sorgente){
+                sorgente.Ricarica(transform);}}}          // Ricaricato in lista
             
 ////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////////
     private void OnCollisionEnter2D(Collision2D collision){              // |Y1-Y2|<1 -> stesso piano

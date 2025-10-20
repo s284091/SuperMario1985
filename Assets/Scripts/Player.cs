@@ -4,14 +4,11 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private PlayerInput input;
     private SpriteRenderer rendererMario;
     private Rigidbody2D rigidBodyMario;
-    private AudioSource[] audioGame=new AudioSource[3];                     // [Salto,PowerUp/Down,Oggetti]
+    private AudioSource[] audioGame=new AudioSource[3];    // [Salto,PowerUp/Down,Oggetti]
     private short direzione;
-    private float posYCollider;                    // Variabili di appoggio
-    private string nameObject;
     private bool boolCollisioneCubo,boolInvincibile;
     private Vector2 marioPiccolo,marioGrande;
-    private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30;
-    [SerializeField] private int altezzaMinimaVisibile;
+    private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
     [SerializeField] private GestorePartita mainSchermo;
     [SerializeField] private AudioClip salto,danno,powerUp,moneta,blocco,kill;
@@ -28,6 +25,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
 ///////////////////////////////////////////////// INVINCIBILITA' ///////////////////////////////////////////////////////
     private IEnumerator Invincibile(){
         var n=0;
+        
         boolInvincibile=true;
         gameObject.layer=LayerMask.NameToLayer("Ghost");        // Il layer "Ghost" disabilita la collisione
         
@@ -62,7 +60,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             return;}
         
         direzione=input.GetDirezione();
-        if(transform.position.y<altezzaMinimaVisibile){        // Cade
+        if(transform.position.y<AltezzaMinimaVisibile){        // Cade
             StartCoroutine(mainSchermo.Morte());}
         else if(input.GetSalto() && rigidBodyMario.linearVelocity.y==0){
             audioGame[0].Play();
@@ -75,8 +73,8 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             
 ////////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////
     private void OnCollisionEnter2D(Collision2D collisione){              // |Y1-Y2|<0.5 -> stesso piano
-        posYCollider=collisione.transform.position.y;
-        nameObject=collisione.gameObject.name.Split()[0];      // Tolgo il numero dietro
+        var posYCollider=collisione.transform.position.y;
+        var nameObject=collisione.gameObject.name.Split()[0];      // Tolgo il numero dietro
         
         if(nameObject=="Fungo"){                             // Tocca il fungo
             mainSchermo.AggiungiPunti(1000);
@@ -89,6 +87,8 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             mainSchermo.AggiungiMoneta();}                   // Monetina
         else if(nameObject=="Pianta" && !boolInvincibile){
             SwitchPowerUp(false);}                      // Colpito da pianta (rischio di 2 assieme)
+        else if(nameObject=="PallaDiFuoco"){
+            SwitchPowerUp(false);}                       // Palla di fuoco
         else if(nameObject=="Asta"){
             StartCoroutine(mainSchermo.Vittoria());}
         
@@ -101,7 +101,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             if(posYCollider>transform.position.y){
                 if(nameObject=="Goomba"){                       // Mi cade addosso
                     SwitchPowerUp(false);}
-                else if(!boolCollisioneCubo){
+                else if(!boolCollisioneCubo){              // No collisioni contemporanee
                     switch(nameObject){
                         case "CuboDistruttibile":                // Distrugge il cubo se grande
                             boolCollisioneCubo=true;

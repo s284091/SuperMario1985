@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi oggetto crea nemici
-    private Vector2 posLoad;
+public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi oggetto crea nemico
     [SerializeField] private List<Transform> nemiciDaAggiungere=new();
-    
-//////////////////////////////////////////////// AWAKE /////////////////////////////////////////////////////////////////
-    private void Awake(){
-        posLoad=new Vector2(transform.position.x,transform.position.y+1);}        // Sopra il tubo
     
 //////////////////////////////////////////////////// AVVIO /////////////////////////////////////////////////////////////
     private void OnBecameVisible(){
-        StartCoroutine(InserisciNemici());}
+        StartCoroutine(nameof(InserisciNemici));}          // Avvio
+    private void OnBecameInvisible(){
+        StopCoroutine(nameof(InserisciNemici));}           // Stop
     
 /////////////////////////////////////////////////// RICARICA ///////////////////////////////////////////////////////////
     public void Ricarica(Transform oggetto){
@@ -20,6 +17,7 @@ public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi ogg
 //////////////////////////////////////////////// ATTESA ////////////////////////////////////////////////////////////////
     private IEnumerator InserisciNemici(){
         var index=0;
+        var posLoad=new Vector2(transform.position.x,transform.position.y+1);             // Sopra il tubo
         
         while(index<nemiciDaAggiungere.Count){                       // Finché ne ha e si vede
             nemiciDaAggiungere[index].position=posLoad;

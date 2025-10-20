@@ -2,18 +2,16 @@
 using UnityEngine;
 class CuboOggetto:MonoBehaviour{               // Gestisce che cosa uscirà dal cubo oggetto
     private SpriteRenderer rendererCuboOggetto;
-    private bool boolMoneta;
     [SerializeField] private Transform oggettoNascosto;
     [SerializeField] private Sprite cuboVuoto;
     
 /////////////////////////////////////////////// AWAKE //////////////////////////////////////////////////////////////////    
     private void Awake(){
-        rendererCuboOggetto=GetComponent<SpriteRenderer>();
-        boolMoneta=oggettoNascosto.name.Contains("Moneta");}
+        rendererCuboOggetto=GetComponent<SpriteRenderer>();}
     
 ///////////////////////////////////////////////// MONETA ///////////////////////////////////////////////////////////////
     public bool PresenzaMoneta(){
-        return boolMoneta;}
+        return oggettoNascosto.name.Contains("Moneta");}
     
 ///////////////////////////////////////////////// GIA' VISTO ///////////////////////////////////////////////////////////
     public bool GetRilasciato(){
@@ -29,5 +27,5 @@ class CuboOggetto:MonoBehaviour{               // Gestisce che cosa uscirà dal 
         oggettoNascosto.gameObject.SetActive(true);
         rendererCuboOggetto.sprite=cuboVuoto;        // Via
 
-        if(boolMoneta){
+        if(oggettoNascosto.name.Contains("Moneta")){
             StartCoroutine(CancellazioneMoneta());}}}            // Toglie la moneta
