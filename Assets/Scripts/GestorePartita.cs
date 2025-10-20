@@ -10,7 +10,7 @@ public class GestorePartita:MonoBehaviour{
     private static int _vite=Vite,_punti,_puntiPrecedenti;
     private AudioSource musica;
     private float posMinX,posMaxX;
-    private Vector3 posCamera,posOggetto,scalaOggetto;
+    private Vector3 posCamera;
     private const float DeltaT=0.0005f,DeltaS=0.2f,DeltaCuboVuoto=0.1f;
     private const int TempoVelocitàDoppia=50,Vite=10;
     private static string _nomeLivello="Livello1";
@@ -25,6 +25,7 @@ public class GestorePartita:MonoBehaviour{
 ////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////////
     private void Awake(){
         var cam=GetComponent<Camera>();                   // Componenti
+        
         musica=GetComponent<AudioSource>();
         Time.timeScale=1;                                      // Azzerato alla morte
         infoPartita[0].text=_punti.ToString();                // Punti
@@ -79,9 +80,9 @@ public class GestorePartita:MonoBehaviour{
 
 /////////////////////////////////////////////////////// VITTORIA ///////////////////////////////////////////////////////
     public IEnumerator Vittoria(){
-        Time.timeScale=0;
         var h=player.position.y<hMax? player.position.y : hMax;
         
+        Time.timeScale=0;
         musica.pitch=1;
         musica.Stop();
         musica.loop=false;
@@ -109,7 +110,6 @@ public class GestorePartita:MonoBehaviour{
         
         musica.clip=musicaVittoria;          // Musichetta
         musica.Play();
-        
         while(musica.isPlaying){
             yield return null;}
         
@@ -134,8 +134,8 @@ public class GestorePartita:MonoBehaviour{
 //////////////////////////////////////////////// MORTE /////////////////////////////////////////////////////////////////
     public IEnumerator Morte(){
         var h=player.position.y+5;
+        var posOggetto=player.position;
         
-        posOggetto=player.position;
         musica.pitch=1;
         Time.timeScale=0;                                             // Non si muove più nulla
         musica.clip=morte;           // Suono morte
@@ -175,8 +175,9 @@ public class GestorePartita:MonoBehaviour{
     
 /////////////////////////////////////////////////////// CUBO VUOTO /////////////////////////////////////////////////////
     public IEnumerator CuboVuoto(Transform obj){
-        posOggetto=obj.position;
-        scalaOggetto=obj.localScale;
+        var posOggetto=obj.position;
+        var scalaOggetto=obj.localScale;
+        
         obj.position=new Vector2(obj.position.x,obj.position.y+DeltaCuboVuoto);      // Su e più grande per 0.5sec
         obj.localScale+=DeltaS*obj.localScale;
         yield return new WaitForSeconds(DeltaCuboVuoto);

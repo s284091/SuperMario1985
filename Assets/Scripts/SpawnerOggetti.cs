@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi oggetto crea nemici
     private Vector2 posLoad;
-    private int index;
     [SerializeField] private List<Transform> nemiciDaAggiungere=new();
     
 //////////////////////////////////////////////// AWAKE /////////////////////////////////////////////////////////////////
@@ -13,9 +12,15 @@ public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi ogg
 //////////////////////////////////////////////////// AVVIO /////////////////////////////////////////////////////////////
     private void OnBecameVisible(){
         StartCoroutine(InserisciNemici());}
+    
+/////////////////////////////////////////////////// RICARICA ///////////////////////////////////////////////////////////
+    public void Ricarica(Transform oggetto){
+        nemiciDaAggiungere.Add(oggetto);}
 
 //////////////////////////////////////////////// ATTESA ////////////////////////////////////////////////////////////////
     private IEnumerator InserisciNemici(){
+        var index=0;
+        
         while(index<nemiciDaAggiungere.Count){                       // Finché ne ha e si vede
             nemiciDaAggiungere[index].position=posLoad;
             nemiciDaAggiungere[index].gameObject.SetActive(true);          // Via

@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GestoreSchermate:MonoBehaviour{
-    private string nomeScena;
     [SerializeField] private string nomeScenaIntro;
     [SerializeField] private Button play,exit,noQuit,quit;
     [SerializeField] private Transform warning,panel;
@@ -13,7 +12,7 @@ public class GestoreSchermate:MonoBehaviour{
     
 /////////////////////////////////////////////// AWAKE //////////////////////////////////////////////////////////////////
     private void Awake(){
-        nomeScena=SceneManager.GetActiveScene().name;         // Comportamento diverso in base alla scena
+        var nomeScena=SceneManager.GetActiveScene().name;         // Comportamento diverso in base alla scena
         
         if(nomeScena=="Morte"){
             StartCoroutine(AnimazioneVite());}            // Scena vita in meno
@@ -58,6 +57,7 @@ public class GestoreSchermate:MonoBehaviour{
     private IEnumerator AnimazioneVite(){
         var livello=GestorePartita.GetLivello();
         var nVite=GestorePartita.GetVite();              // Ottengo le vite
+        
         vite.text=nVite.ToString();
         yield return new WaitForSecondsRealtime(1);
         nVite--;
