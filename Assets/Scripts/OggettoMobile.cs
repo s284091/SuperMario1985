@@ -3,7 +3,6 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
     private SpriteRenderer rendererOggetto;
     private Rigidbody2D rigidbodyOggetto;
     private const int AltezzaMinimaVisibile=3;
-    [SerializeField] private SpawnerOggetti sorgente;
     [SerializeField] private int velocità;
     
 ////////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////
@@ -13,17 +12,12 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
     
 //////////////////////////////////////////////////////// UPDATE ////////////////////////////////////////////////////////
     private void Update(){
-        if(!rendererOggetto.isVisible){
-            return;}
-        
         rigidbodyOggetto.linearVelocityX=rigidbodyOggetto.linearVelocityY==0? velocità : 0;
         if(transform.position.y<AltezzaMinimaVisibile){          // Disattivato
-            gameObject.SetActive(false);
-            if(sorgente){
-                sorgente.Ricarica(transform);}}}          // Ricaricato in lista
+            gameObject.SetActive(false);}}
             
 ////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////////
     private void OnCollisionEnter2D(Collision2D collision){              // |Y1-Y2|<1 -> stesso piano
-        if(Mathf.Abs(collision.transform.position.y-transform.position.y)<1){
+        if(Mathf.Abs(collision.transform.position.y-transform.position.y)<1 && collision.gameObject.name!="Mario"){
             velocità=-velocità;
             rendererOggetto.flipX=!rendererOggetto.flipX;}}}

@@ -6,7 +6,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private Rigidbody2D rigidBodyMario;
     private AudioSource[] audioGame=new AudioSource[3];    // [Salto,PowerUp/Down,Oggetti]
     private short direzione;
-    private bool boolCollisioneCubo,boolInvincibile;
+    private bool boolCollisioneCubo,boolInvincibile,boolTerreno=true;        // Default: tocca terra
     private Vector2 marioPiccolo,marioGrande;
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
@@ -50,6 +50,10 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
         else{
             rendererMario.sprite=marioMorto;
             StartCoroutine(mainSchermo.Morte());}}                      // Morte
+    
+/////////////////////////////////////////////////// GETTER SALTO ///////////////////////////////////////////////////////
+    public bool GetTerreno(){
+        return boolTerreno;}
 
 //////////////////////////////////////////////// UPDATE ////////////////////////////////////////////////////////////////
     private void Update(){
@@ -62,7 +66,8 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
         direzione=input.GetDirezione();
         if(transform.position.y<AltezzaMinimaVisibile){        // Cade
             StartCoroutine(mainSchermo.Morte());}
-        else if(input.GetSalto() && rigidBodyMario.linearVelocity.y==0){
+        else if(input.GetSalto() && boolTerreno){
+            boolTerreno=false;
             audioGame[0].Play();
             rendererMario.sprite=marioSalta;
             rigidBodyMario.linearVelocityY=FattoreSalto;}                  // Salta
@@ -127,4 +132,5 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
                 collisione.gameObject.SetActive(false);
                 rigidBodyMario.linearVelocityY=FattoreSalto/2f;}            // Rimbalzo
             else{
+                boolTerreno=true;
                 boolCollisioneCubo=false;}}}}        // Terra

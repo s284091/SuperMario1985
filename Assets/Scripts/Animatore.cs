@@ -3,12 +3,14 @@ using UnityEngine;
 public class Animatore:MonoBehaviour{
     private SpriteRenderer rendererOggetto;
     private Rigidbody2D rigidbodyOggetto;
+    private Player playerOggetto;
     [SerializeField] private Sprite std,camminata;
     
 /////////////////////////////////////////////// AWAKE //////////////////////////////////////////////////////////////////
     private void Awake(){
         rigidbodyOggetto=GetComponent<Rigidbody2D>();
         rendererOggetto=GetComponent<SpriteRenderer>();
+        playerOggetto=GetComponent<Player>();
         StartCoroutine(Animazione());}
 
 ////////////////////////////////////////////////// ANIMAZIONE //////////////////////////////////////////////////////////
@@ -24,9 +26,9 @@ public class Animatore:MonoBehaviour{
                     tempo=0.5f;
                     break;
                 case "Mario":
-                    if(rigidbodyOggetto.linearVelocity==Vector2.zero){
+                    if(rigidbodyOggetto.linearVelocityX==0 && playerOggetto.GetTerreno()){           // Fermo
                         rendererOggetto.sprite=std;}
-                    else if(rigidbodyOggetto.linearVelocityX!=0 && rigidbodyOggetto.linearVelocityY==0){
+                    else if(rigidbodyOggetto.linearVelocityX!=0 && rigidbodyOggetto.linearVelocityY==0){   // Cammina
                         rendererOggetto.sprite=rendererOggetto.sprite==std? camminata:std;}
                     tempo=0.2f;
                     break;}
