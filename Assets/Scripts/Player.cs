@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 public class Player:MonoBehaviour{                         // Gestisce i movimenti del giocatore
     private PlayerInput input;
@@ -6,8 +7,9 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private Rigidbody2D rigidBodyMario;
     private AudioSource[] audioGame=new AudioSource[3];    // [Salto,PowerUp/Down,Oggetti]
     private short direzione;
-    private bool boolCollisioneCubo,boolInvincibile,boolTerreno=true;        // Default: tocca terra
+    private bool boolCollisioneCubo,boolInvincibile,boolTerreno;
     private Vector2 marioPiccolo,marioGrande;
+    private readonly string[] nemiciMobili={"Goomba","Koopa"};
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
     [SerializeField] private GestorePartita mainSchermo;
@@ -67,7 +69,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
         if(transform.position.y<AltezzaMinimaVisibile){        // Cade
             StartCoroutine(mainSchermo.Morte());}
         else if(input.GetSalto() && boolTerreno){
-            boolTerreno=false;
+            boolTerreno=false;                                 // Non tocca più
             audioGame[0].Play();
             rendererMario.sprite=marioSalta;
             rigidBodyMario.linearVelocityY=FattoreSalto;}                  // Salta
@@ -98,13 +100,13 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             StartCoroutine(mainSchermo.Vittoria());}
         
         //// ASSE X
-        else if(Mathf.Abs(posYCollider-transform.position.y)<1 && nameObject=="Goomba" && !boolInvincibile){
+        else if(Mathf.Abs(posYCollider-transform.position.y)<1 && nemiciMobili.Contains(nameObject)){
             SwitchPowerUp(false);}                                  // Colpito dal Goomba
         
         //// ASSE Y
         else{
             if(posYCollider>transform.position.y){
-                if(nameObject=="Goomba"){                       // Mi cade addosso
+                if(nemiciMobili.Contains(nameObject)){         // Mi cade addosso un nemico
                     SwitchPowerUp(false);}
                 else if(!boolCollisioneCubo){              // No collisioni contemporanee
                     switch(nameObject){
@@ -125,7 +127,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
                                 audioGame[2].clip=moneta;       // Suono moneta
                                 audioGame[2].Play();}
                             break;}}}
-            else if(nameObject=="Goomba"){                 // Nemico
+            else if(nemiciMobili.Contains(nameObject)){                 // Cado su un nemico
                 mainSchermo.AggiungiPunti(100);                 // Nuovi punti
                 audioGame[2].clip=kill;
                 audioGame[2].Play();

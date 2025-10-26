@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi oggetto crea nemico
     private bool routine;
-    [SerializeField] private List<Transform> nemiciDaAggiungere=new();
+    private Vector2 posLoad;
+    [SerializeField] private int pos;
+    [SerializeField] private Transform[] nemiciDaAggiungere;
+    
+///////////////////////////////////////////////////// AWAKE ////////////////////////////////////////////////////////////
+    private void Awake(){
+        posLoad=transform.position;
+        posLoad.y=pos==0? transform.position.y+1 : transform.position.y-1;}        // 0: sopra, 1: sotto
     
 //////////////////////////////////////////////////// AVVIO /////////////////////////////////////////////////////////////
     private void OnBecameVisible(){
@@ -15,14 +21,12 @@ public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi ogg
 //////////////////////////////////////////////// ATTESA ////////////////////////////////////////////////////////////////
     private IEnumerator InserisciNemici(){
         var index=0;
-        var posLoad=new Vector2(transform.position.x,transform.position.y+1);             // Sopra il tubo
         
-        while(routine){                       // Finché si vede
-            if(!nemiciDaAggiungere[index].gameObject.activeSelf){
-                nemiciDaAggiungere[index].position=posLoad;
-                nemiciDaAggiungere[index].gameObject.SetActive(true);}          // Via
-            index++;
-            
-            if(index==nemiciDaAggiungere.Count){              // All'infinito, finché non viene fermata
+        while(routine){
+            if(index==nemiciDaAggiungere.Length){    // All'infinito, finché non viene fermata
                 index=0;}
-            yield return new WaitForSeconds(2);}}}
+            
+            nemiciDaAggiungere[index].position=posLoad;
+            nemiciDaAggiungere[index].gameObject.SetActive(true);          // Via
+            yield return new WaitForSeconds(2);
+            index++;}}}

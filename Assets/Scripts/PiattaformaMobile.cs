@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 public class PiattaformaMobile:MonoBehaviour{
-    private Vector2 posMax,posMin;
+    private Vector2 posMax,posMin,posObj;
+    private bool teletrasportata;
     private Rigidbody2D rigidBodyOggetto;
     private const int AltezzaMinimaVisibile=4,AltezzaMassimaVisibile=14;
     [SerializeField] private int velocità;
+    [SerializeField] private Transform[] nemiciSopra;
     
 ////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////////
     private void Awake(){
@@ -15,4 +17,15 @@ public class PiattaformaMobile:MonoBehaviour{
 ///////////////////////////////////////////////////// UPDATE ///////////////////////////////////////////////////////////
     private void Update(){
         if(transform.position.y>=AltezzaMassimaVisibile){             // Riappare sotto
-            transform.position=posMin;}}}
+            transform.position=posMin;
+            teletrasportata=true;}
+        else if(transform.position.y<AltezzaMinimaVisibile){            // Riappare sopra
+            teletrasportata=true;
+            transform.position=posMax;}
+        
+        if(teletrasportata){                       // Sposta i nemici
+            teletrasportata=false;
+            foreach(var transformNemico in nemiciSopra){           // new pos(x,h_piattaforma+0.1)
+                posObj=transformNemico.position;
+                posObj.y=transform.position.y+0.1f;
+                transformNemico.position=posObj;}}}}

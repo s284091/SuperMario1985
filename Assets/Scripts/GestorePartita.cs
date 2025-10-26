@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -17,8 +16,8 @@ public class GestorePartita:MonoBehaviour{
     [SerializeField] private int terra,hSogliaTop;
     [SerializeField] private Transform posBandiera;
     [SerializeField] private Transform player,pausaPanel;
-    [SerializeField] private List<CuboOggetto> cubiOggetto;
-    [SerializeField] private List<TMP_Text> infoPartita;
+    [SerializeField] private CuboOggetto[] cubiOggetto;
+    [SerializeField] private TMP_Text[] infoPartita;
     [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria;
     
 ////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////////
