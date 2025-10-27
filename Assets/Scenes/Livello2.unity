@@ -1466,7 +1466,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &82496371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,7 +2524,7 @@ GameObject:
   - component: {fileID: 107415178}
   - component: {fileID: 107415177}
   - component: {fileID: 107415176}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2557,7 +2557,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &107415177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6548,7 +6548,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!1 &214651918
 GameObject:
   m_ObjectHideFlags: 0
@@ -7104,7 +7104,7 @@ GameObject:
   - component: {fileID: 229482953}
   - component: {fileID: 229482952}
   - component: {fileID: 229482951}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7137,7 +7137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &229482952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9148,7 +9148,7 @@ GameObject:
   - component: {fileID: 292942426}
   - component: {fileID: 292942425}
   - component: {fileID: 292942424}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9181,7 +9181,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &292942425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12368,7 +12368,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &368159896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12756,7 +12756,7 @@ GameObject:
   - component: {fileID: 385722614}
   - component: {fileID: 385722613}
   - component: {fileID: 385722612}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12789,7 +12789,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &385722613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15430,7 +15430,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &477791433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15732,7 +15732,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &484923776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18180,7 +18180,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &559645728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27853,7 +27853,7 @@ GameObject:
   - component: {fileID: 898433117}
   - component: {fileID: 898433116}
   - component: {fileID: 898433115}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27886,7 +27886,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &898433116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31436,7 +31436,7 @@ GameObject:
   - component: {fileID: 1018959559}
   - component: {fileID: 1018959558}
   - component: {fileID: 1018959557}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31469,7 +31469,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &1018959558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37496,7 +37496,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &1280815047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38376,7 +38376,7 @@ GameObject:
   - component: {fileID: 1296225816}
   - component: {fileID: 1296225815}
   - component: {fileID: 1296225819}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38528,7 +38528,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!1 &1298380234
 GameObject:
   m_ObjectHideFlags: 0
@@ -44822,7 +44822,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!1 &1528541466
 GameObject:
   m_ObjectHideFlags: 0
@@ -45581,7 +45581,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &1554229590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49161,7 +49161,7 @@ GameObject:
   - component: {fileID: 1691334093}
   - component: {fileID: 1691334092}
   - component: {fileID: 1691334096}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49313,7 +49313,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!1 &1692416326
 GameObject:
   m_ObjectHideFlags: 0
@@ -52125,7 +52125,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &1790504814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52811,7 +52811,7 @@ GameObject:
   - component: {fileID: 1810180071}
   - component: {fileID: 1810180070}
   - component: {fileID: 1810180069}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52844,7 +52844,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &1810180070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53569,7 +53569,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &1832903316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55704,7 +55704,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!114 &1900932645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62454,7 +62454,7 @@ GameObject:
   - component: {fileID: 2109176956}
   - component: {fileID: 2109176955}
   - component: {fileID: 2109176954}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PallaDiFuoco (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62487,7 +62487,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &2109176955
 MonoBehaviour:
   m_ObjectHideFlags: 0

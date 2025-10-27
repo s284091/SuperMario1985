@@ -30,12 +30,9 @@ public class PallaInfuocata:MonoBehaviour{                 // Gestisce una palla
     private void OnCollisionEnter2D(Collision2D collision){
         var nameGameObject=collision.gameObject.name.Split()[0];        // Tolgo il numero
         
-        switch(nameGameObject){
-            case "CuboNonDistruttibile":                // Inversione
-                transform.localScale=transform.localScale.y.Equals(1)? capovolta : Vector2.one;
-                rigidbodyOggetto.linearVelocityY=-velocità;
-                break;
-            case "Pianta":                                   // Solo la pianta conta
-                StartCoroutine(Riparte());
-                break;}}}
+        if(nameGameObject=="Pianta"){                        // Solo la pianta conta
+             StartCoroutine(Riparte());}
+        else{                                                     // Inversione
+             transform.localScale=transform.localScale.y.Equals(1)? capovolta : Vector2.one;
+             rigidbodyOggetto.linearVelocityY=-velocità;}}}
                  
