@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
 public class GestorePartita:MonoBehaviour{
@@ -16,7 +15,6 @@ public class GestorePartita:MonoBehaviour{
     [SerializeField] private int terra,hSogliaTop;
     [SerializeField] private Transform posBandiera;
     [SerializeField] private Transform player,pausaPanel;
-    [SerializeField] private CuboOggetto[] cubiOggetto;
     [SerializeField] private TMP_Text[] infoPartita;
     [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria;
     
@@ -122,7 +120,10 @@ public class GestorePartita:MonoBehaviour{
             case "Livello1":
                 _nomeLivello="Livello2";
                 break;
-            case "Livello2":               // Prossimo livello
+            case "Livello2":                      // Prossimo livello
+                _nomeLivello="Livello3";
+                break;
+            case "Livello3":
                 _nomeLivello="Esito";
                 break;}
 
@@ -181,16 +182,6 @@ public class GestorePartita:MonoBehaviour{
         yield return new WaitForSeconds(DeltaCuboVuoto);
         obj.position=posOggetto;
         obj.localScale=scalaOggetto;}
-    
-//////////////////////////////////////////////// OGGETTI NASCOSTI //////////////////////////////////////////////////////
-    public bool RilasciaOggetto(string nomeCubo){
-        var cuboOggettoCollisione=cubiOggetto.FirstOrDefault(cubo=>cubo.name==nomeCubo && !cubo.GetRilasciato());
-        
-        if(!cuboOggettoCollisione){
-            return false;}
-        
-        cuboOggettoCollisione.Rilascia();
-        return cuboOggettoCollisione.PresenzaMoneta();}               // Mi dice se suonare o no
         
 ///////////////////////////////////////////////////////// UPDATE ///////////////////////////////////////////////////////
     private void Update(){

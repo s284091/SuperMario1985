@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 661e20d9476adcd4583b511d9bd17f1e
+guid: bda059757b288b843946bfd2831b0486
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5790663279991425730
-    second: LivelloSotterraneo_0
+      213: 877052614942722749
+    second: LanciaFiamme_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LivelloSotterraneo_0
+      name: LanciaFiamme_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 305
-        height: 241
+        width: 1022
+        height: 1536
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2ca89c9a2919c5050800000000000000
-      internalID: 5790663279991425730
+      spriteID: dba0dfad4baeb2c00800000000000000
+      internalID: 877052614942722749
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LivelloSotterraneo_0: 5790663279991425730
+      LanciaFiamme_0: 877052614942722749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

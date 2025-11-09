@@ -2,6 +2,7 @@
 using UnityEngine;
 class CuboOggetto:MonoBehaviour{               // Gestisce che cosa uscirà dal cubo oggetto
     private SpriteRenderer rendererCuboOggetto;
+    [SerializeField] private AudioSource audioCamera;
     [SerializeField] private Transform oggettoNascosto;
     [SerializeField] private Sprite cuboVuoto;
     
@@ -9,23 +10,18 @@ class CuboOggetto:MonoBehaviour{               // Gestisce che cosa uscirà dal 
     private void Awake(){
         rendererCuboOggetto=GetComponent<SpriteRenderer>();}
     
-///////////////////////////////////////////////// MONETA ///////////////////////////////////////////////////////////////
-    public bool PresenzaMoneta(){
-        return oggettoNascosto.name.Contains("Moneta");}
-    
-///////////////////////////////////////////////// GIA' VISTO ///////////////////////////////////////////////////////////
-    public bool GetRilasciato(){
-        return rendererCuboOggetto.sprite==cuboVuoto;}
-    
 ///////////////////////////////////////////// CANCELLA LA MONETA ///////////////////////////////////////////////////////
     private IEnumerator CancellazioneMoneta(){
-        yield return new WaitForSeconds(1);                    // La toglie dopo 1 secondo
+        audioCamera.Play();
+        yield return new WaitForSeconds(1);                    // Suona e a toglie dopo 1 secondo
         oggettoNascosto.gameObject.SetActive(false);}
  
-//////////////////////////////////////////////// RILASCIA OGGETTO //////////////////////////////////////////////////////
-    public void Rilascia(){
+//////////////////////////////////////////////// COLLISIONE MARIO //////////////////////////////////////////////////////
+    private void OnCollisionEnter2D(Collision2D collision){               // Mario mi colpisce da sotto
+        if(collision.transform.position.y>=transform.position.y || rendererCuboOggetto.sprite==cuboVuoto){
+            return;}
+        
         oggettoNascosto.gameObject.SetActive(true);
         rendererCuboOggetto.sprite=cuboVuoto;        // Via
-
         if(oggettoNascosto.name.Contains("Moneta")){
-            StartCoroutine(CancellazioneMoneta());}}}            // Toglie la moneta
+            StartCoroutine(CancellazioneMoneta());}}}            // Toglie la moneta e suona

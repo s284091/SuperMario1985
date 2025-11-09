@@ -108,25 +108,15 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             if(posYCollider>transform.position.y){
                 if(nemiciMobili.Contains(nameObject)){         // Mi cade addosso un nemico
                     SwitchPowerUp(false);}
-                else if(!boolCollisioneCubo){              // No collisioni contemporanee
-                    switch(nameObject){
-                        case "CuboDistruttibile":                // Distrugge il cubo se grande
-                            boolCollisioneCubo=true;
-                            if(transform.localScale.y>1){
-                                mainSchermo.AggiungiPunti(50);
-                                audioGame[2].clip=blocco;
-                                audioGame[2].Play();
-                                collisione.gameObject.SetActive(false);}
-                            else{
-                                StartCoroutine(mainSchermo.CuboVuoto(collisione.gameObject.transform));}
-                            break;
-                        case "CuboOggetto":
-                            boolCollisioneCubo=true;
-                            if(mainSchermo.RilasciaOggetto(collisione.gameObject.name)){
-                                mainSchermo.AggiungiMoneta();
-                                audioGame[2].clip=moneta;       // Suono moneta
-                                audioGame[2].Play();}
-                            break;}}}
+                else if(!boolCollisioneCubo && nameObject=="CuboDistruttibile"){       // No collisioni contemporanee
+                        boolCollisioneCubo=true;
+                        if(transform.localScale.y>1){
+                            mainSchermo.AggiungiPunti(50);               // Distrugge il cubo se grande
+                            audioGame[2].clip=blocco;
+                            audioGame[2].Play();
+                            collisione.gameObject.SetActive(false);}
+                        else{
+                            StartCoroutine(mainSchermo.CuboVuoto(collisione.gameObject.transform));}}}
             else if(nemiciMobili.Contains(nameObject)){                 // Cado su un nemico
                 mainSchermo.AggiungiPunti(100);                 // Nuovi punti
                 audioGame[2].clip=kill;
