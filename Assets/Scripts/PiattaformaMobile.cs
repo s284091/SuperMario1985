@@ -15,7 +15,7 @@ public class PiattaformaMobile:MonoBehaviour{
         
 ///////////////////////////////////////////////////// UPDATE ///////////////////////////////////////////////////////////
     private void Update(){
-        if(transform.position.y>=AltezzaMassimaVisibile){             // Riappare sotto
+        if(transform.position.y>AltezzaMassimaVisibile){             // Riappare sotto
             transform.position=posMin;}
         else if(transform.position.y<AltezzaMinimaVisibile){            // Riappare sopra
             transform.position=posMax;}

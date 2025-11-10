@@ -2,11 +2,13 @@
 public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsiasi oggetto mobile
     private SpriteRenderer rendererOggetto;
     private Rigidbody2D rigidbodyOggetto;
+    private string nomeGo;
     private const int AltezzaMinimaVisibile=3;
     [SerializeField] private int velocità;
     
 ////////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////
     private void Awake(){
+        nomeGo=name.Split()[0];
         rigidbodyOggetto=GetComponent<Rigidbody2D>();
         rendererOggetto=GetComponent<SpriteRenderer>();}               // Inizializzazione
     
@@ -18,6 +20,11 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
             
 ////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////////
     private void OnCollisionEnter2D(Collision2D collision){              // |Y1-Y2|<1 -> stesso piano
-        if(Mathf.Abs(collision.transform.position.y-transform.position.y)<1 && collision.gameObject.name!="Mario"){
+        if(Mathf.Abs(collision.transform.position.y-transform.position.y)>=1){
+            return;}
+            
+        if(nomeGo=="BulletBill"){
+            gameObject.SetActive(false);}
+        else if(collision.gameObject.name!="Mario"){
             velocità=-velocità;
             rendererOggetto.flipX=!rendererOggetto.flipX;}}}

@@ -22,7 +22,7 @@ public class GestorePartita:MonoBehaviour{
     private void Awake(){
         var cam=GetComponent<Camera>();                   // Componenti
         
-        musica=GetComponent<AudioSource>();
+        musica=GetComponents<AudioSource>()[1];
         Time.timeScale=1;                                      // Azzerato alla morte
         infoPartita[0].text=_punti.ToString();                // Punti
         infoPartita[3].text=_vite.ToString();                // Vite (10 o rimanenti)
@@ -115,18 +115,8 @@ public class GestorePartita:MonoBehaviour{
             infoPartita[2].text=tempo.ToString();
             yield return new WaitForSecondsRealtime(DeltaT);}
         _puntiPrecedenti+=_punti;                  // Punti=somma
-            
-        switch(_nomeLivello){
-            case "Livello1":
-                _nomeLivello="Livello2";
-                break;
-            case "Livello2":                      // Prossimo livello
-                _nomeLivello="Livello3";
-                break;
-            case "Livello3":
-                _nomeLivello="Esito";
-                break;}
-
+         
+        _nomeLivello=_nomeLivello=="Livello1"? "Livello2" : "Livello3";            // Prossimo elemento
         yield return new WaitForSecondsRealtime(1);
         SceneManager.LoadScene(_nomeLivello);}
 

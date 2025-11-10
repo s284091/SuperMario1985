@@ -8,8 +8,19 @@ public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi ogg
     
 ///////////////////////////////////////////////////// AWAKE ////////////////////////////////////////////////////////////
     private void Awake(){
-        posLoad=transform.position;
-        posLoad.y=pos==0? transform.position.y+1 : transform.position.y-1;}        // 0: sopra, 1: sotto
+        switch(pos){
+            case 0:
+                posLoad=new Vector2(transform.position.x,transform.position.y+1);          // 0: sotto
+                break;
+            case 1:
+                posLoad=new Vector2(transform.position.x,transform.position.y-1);          // 1: sopra
+                break;
+            case 2:
+                posLoad=new Vector2(transform.position.x+2.5f,transform.position.y+0.5f);          // 2: destra
+                break;
+            default:
+                posLoad=new Vector2(transform.position.x-2.5f,transform.position.y+0.5f);          // 3: sinistra
+                break;}}
     
 //////////////////////////////////////////////////// AVVIO /////////////////////////////////////////////////////////////
     private void OnBecameVisible(){
