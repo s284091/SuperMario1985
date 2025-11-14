@@ -23,8 +23,9 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
         if(Mathf.Abs(collision.transform.position.y-transform.position.y)>=1){
             return;}
             
-        if(nomeGo=="BulletBill"){
-            gameObject.SetActive(false);}
-        else if(collision.gameObject.name!="Mario"){
+        if(nomeGo=="BulletBill"){                       // Il bullet esplode se si schianta
+            if(transform.localScale.x.Equals(1) || collision.gameObject.name.Contains("CuboNonDistruttibile")){
+                gameObject.SetActive(false);}}
+        else{                                        // Gli altri tornano indietro
             velocità=-velocità;
             rendererOggetto.flipX=!rendererOggetto.flipX;}}}

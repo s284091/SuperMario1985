@@ -16,10 +16,10 @@ public class SpawnerOggetti:MonoBehaviour{          // Gestisce un qualsiasi ogg
                 posLoad=new Vector2(transform.position.x,transform.position.y-1);          // 1: sopra
                 break;
             case 2:
-                posLoad=new Vector2(transform.position.x+2.5f,transform.position.y+0.5f);          // 2: destra
+                posLoad=new Vector2(transform.position.x+2,transform.position.y+0.5f);          // 2: destra
                 break;
             default:
-                posLoad=new Vector2(transform.position.x-2.5f,transform.position.y+0.5f);          // 3: sinistra
+                posLoad=new Vector2(transform.position.x-2,transform.position.y+0.5f);          // 3: sinistra
                 break;}}
     
 //////////////////////////////////////////////////// AVVIO /////////////////////////////////////////////////////////////

@@ -10,6 +10,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private bool boolCollisioneCubo,boolInvincibile,boolTerreno;
     private Vector2 marioPiccolo,marioGrande;
     private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill"};
+    private readonly string[] nemiciDiFuoco={"PallaInfuocata","LanciaFiamme","BarraInfuocata"};
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
     [SerializeField] private GestorePartita mainSchermo;
@@ -94,8 +95,8 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             mainSchermo.AggiungiMoneta();}                   // Monetina
         else if(nameObject=="Pianta" && !boolInvincibile){
             SwitchPowerUp(false);}                      // Colpito da pianta (rischio di 2 assieme)
-        else if(nameObject=="PallaDiFuoco" || nameObject=="LanciaFiamme"){
-            SwitchPowerUp(false);}                       // Palla di fuoco o lanciafiamme
+        else if(nemiciDiFuoco.Contains(nameObject)){
+            SwitchPowerUp(false);}                       // Palla di fuoco o lanciafiamme o barra
         else if(nameObject=="Asta"){
             StartCoroutine(mainSchermo.Vittoria());}
         

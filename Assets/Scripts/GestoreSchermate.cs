@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GestoreSchermate:MonoBehaviour{
-    [SerializeField] private string nomeScenaIntro;
     [SerializeField] private Button play,exit,noQuit,quit;
     [SerializeField] private Transform warning,panel;
     [SerializeField] private TMP_Text vite,youLost,puntiFinali;
@@ -20,7 +19,7 @@ public class GestoreSchermate:MonoBehaviour{
             puntiFinali.text=GestorePartita.GetPunti().ToString();
             exit.onClick.AddListener(()=>SceneManager.LoadScene("Intro"));}         // Scena vittoria
         else if(nomeScena=="Intro"){
-            play.onClick.AddListener(()=>SceneManager.LoadScene(nomeScenaIntro));
+            play.onClick.AddListener(()=>SceneManager.LoadScene("Livello1"));        // Inizio
             quit.onClick.AddListener(()=>{Application.Quit(1);});
             exit.onClick.AddListener(()=>Handler(1));
             noQuit.onClick.AddListener(()=>Handler(2));}
