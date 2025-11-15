@@ -19,13 +19,12 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
             gameObject.SetActive(false);}}
             
 ////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////////
-    private void OnCollisionEnter2D(Collision2D collision){              // |Y1-Y2|<1 -> stesso piano
-        if(Mathf.Abs(collision.transform.position.y-transform.position.y)>=1){
-            return;}
-            
+    private void OnCollisionEnter2D(Collision2D collision){  
         if(nomeGo=="BulletBill"){                       // Il bullet esplode se si schianta
-            if(transform.localScale.x.Equals(1) || collision.gameObject.name.Contains("CuboNonDistruttibile")){
+            if(transform.localScale.x>1 && collision.gameObject.name.Contains("CuboDistruttibile")){
+                collision.gameObject.SetActive(false);}
+            else{
                 gameObject.SetActive(false);}}
-        else{                                        // Gli altri tornano indietro
+        else if(Mathf.Abs(collision.transform.position.y-transform.position.y)<1){    // |Y1-Y2|<1 -> stesso piano
             velocità=-velocità;
             rendererOggetto.flipX=!rendererOggetto.flipX;}}}

@@ -10,7 +10,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private bool boolCollisioneCubo,boolInvincibile,boolTerreno;
     private Vector2 marioPiccolo,marioGrande;
     private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill"};
-    private readonly string[] nemiciDiFuoco={"PallaInfuocata","LanciaFiamme","BarraInfuocata"};
+    private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata"};
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
     [SerializeField] private GestorePartita mainSchermo;
@@ -99,6 +99,8 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
             SwitchPowerUp(false);}                       // Palla di fuoco o lanciafiamme o barra
         else if(nameObject=="Asta"){
             StartCoroutine(mainSchermo.Vittoria());}
+        else if(nameObject=="Ascia"){
+            StartCoroutine(mainSchermo.VittoriaFinale());}           // Fine livello
         
         //// ASSE X
         else if(Mathf.Abs(posYCollider-transform.position.y)<1 && nemiciMobili.Contains(nameObject)){

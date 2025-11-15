@@ -27259,7 +27259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e3e51f3f27489dab7f5dbab2698ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nomeScenaIntro: 
   play: {fileID: 1597328152}
   exit: {fileID: 523367921}
   noQuit: {fileID: 71576770}
@@ -44316,7 +44315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05e639a9b0141a49d563af39d152c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: 0
+  tempoDiRitorno: 2
+  posLoad: {x: 143, y: 7}
   nemiciDaAggiungere:
   - {fileID: 94597075}
   - {fileID: 626764282}

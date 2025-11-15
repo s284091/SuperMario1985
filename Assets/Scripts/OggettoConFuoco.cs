@@ -4,7 +4,7 @@ public class OggettoConFuoco:MonoBehaviour{                 // Gestisce i lancia
     private bool ruota;
     private CapsuleCollider2D colliderOggetto;
     private SpriteRenderer rendererOggetto;
-    [SerializeField] private int versoRotazione;
+    [SerializeField] private float versoRotazione;
     [SerializeField] private Vector2 puntoFisso;
     
 /////////////////////////////////////////////// AWAKE //////////////////////////////////////////////////////////////////

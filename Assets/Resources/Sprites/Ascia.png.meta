@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b1871acdd948700439d01234a1c68eb7
+guid: 78ad7e72404cf0546a1f177d433a20be
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5291067680486196363
-    second: CuboDistruttibileCastello_0
+      213: -7383442807038180149
+    second: Ascia_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 600
+  spritePixelsToUnits: 700
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CuboDistruttibileCastello_0
+      name: Ascia_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1536
+        width: 88
+        height: 86
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 57bf1165af95296b0800000000000000
-      internalID: -5291067680486196363
+      spriteID: bc4831bd2edb88990800000000000000
+      internalID: -7383442807038180149
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CuboDistruttibileCastello_0: -5291067680486196363
+      Ascia_0: -7383442807038180149
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

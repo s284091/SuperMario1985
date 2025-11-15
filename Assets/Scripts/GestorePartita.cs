@@ -119,6 +119,13 @@ public class GestorePartita:MonoBehaviour{
         _nomeLivello=_nomeLivello=="Livello1"? "Livello2" : "Livello3";            // Prossimo elemento
         yield return new WaitForSecondsRealtime(1);
         SceneManager.LoadScene(_nomeLivello);}
+    
+    public IEnumerator VittoriaFinale(){                    // Vittoria ultimo livello
+        Time.timeScale=0;
+        musica.pitch=1;
+        musica.Stop();
+        musica.loop=false;
+        yield return new WaitForSecondsRealtime(0f);}
 
 //////////////////////////////////////////////// MORTE /////////////////////////////////////////////////////////////////
     public IEnumerator Morte(){
