@@ -7,7 +7,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private Rigidbody2D rigidBodyMario;
     private AudioSource[] audioGame=new AudioSource[3];    // [Salto,PowerUp/Down,Oggetti]
     private short direzione;
-    private bool boolCollisioneCubo,boolInvincibile,boolTerreno;
+    private bool boolCollisioneCubo,boolInvincibile,boolTerreno,scontroAvviato;
     private Vector2 marioPiccolo,marioGrande;
     private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill"};
     private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata"};
@@ -108,6 +108,9 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
         
         //// ASSE Y
         else{
+            if(nameObject=="Ponte" && !scontroAvviato){
+                scontroAvviato=true;
+                mainSchermo.InizioScontro();}
             if(posYCollider>transform.position.y){
                 if(nemiciMobili.Contains(nameObject)){         // Mi cade addosso un nemico
                     SwitchPowerUp(false);}

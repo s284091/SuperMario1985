@@ -7,16 +7,16 @@ public class GestorePartita:MonoBehaviour{
     private static int _vite=Vite,_punti,_puntiPrecedenti;
     private AudioSource musica;
     private float posMinX,posMaxX;
-    private Vector3 posCamera;
-    private const float DeltaT=0.0005f,DeltaS=0.2f,DeltaCuboVuoto=0.1f;
-    private const int TempoVelocitàDoppia=50,Vite=10,AltezzaMinimaVisibile=3;
+    private Vector3 posCamera,posObj;
+    private const float DeltaT=0.0005f,DeltaS=0.2f,DeltaCuboVuoto=0.1f,DeltaAscia=1.5f;
+    private const int TempoVelocitàDoppia=50,Vite=10,AltezzaMinimaVisibile=3,DeltaPonte=2;
     private static string _nomeLivello="Livello1";
     [SerializeField] private float hMax;
     [SerializeField] private int terra,hSogliaTop;
-    [SerializeField] private Transform posBandiera;
-    [SerializeField] private Transform player,pausaPanel;
+    [SerializeField] private Transform posBandiera,player,pausaPanel,bowser;
+    [SerializeField] private Transform[] cubiDaMettere,ponte;
     [SerializeField] private TMP_Text[] infoPartita;
-    [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria;
+    [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria,cadeBowser;
     
 ////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////////
     private void Awake(){
@@ -121,11 +121,47 @@ public class GestorePartita:MonoBehaviour{
         SceneManager.LoadScene(_nomeLivello);}
     
     public IEnumerator VittoriaFinale(){                    // Vittoria ultimo livello
+        var posRotazione=new Vector2(posBandiera.position.x,posBandiera.position.y-DeltaAscia);
+        var n=0;
+        
         Time.timeScale=0;
+        posBandiera.RotateAround(posRotazione,Vector3.forward,90);       // Cade l'ascia
+        yield return new WaitForSecondsRealtime(0.5f);
+        
+        while(n<ponte.Length){
+            n++;
+            yield return new WaitForSecondsRealtime(DeltaS);           // Crolla il ponte
+            for(int i=0;i<n;i++){
+                posObj=ponte[i].position;
+                posObj.y-=DeltaPonte;
+                ponte[i].position=posObj;}}
+        
+        yield return new WaitForSecondsRealtime(DeltaAscia);
         musica.pitch=1;
         musica.Stop();
         musica.loop=false;
-        yield return new WaitForSecondsRealtime(0f);}
+        musica.clip=cadeBowser;          // Musichetta morte Bowser
+        musica.Play();
+        
+        while(bowser.position.y>0){
+            yield return new WaitForSecondsRealtime(DeltaS);            // Cade Bowser
+            posObj=bowser.position;
+            posObj.y-=DeltaPonte;
+            bowser.position=posObj;}
+        
+        musica.clip=musicaVittoria;          // Musichetta
+        musica.Play();
+        while(musica.isPlaying){
+            yield return null;}
+        
+        AggiungiPunti(10000);                // Punti vittoria e tempo
+        while(tempo>0){
+            tempo--;
+            AggiungiPunti(50);
+            infoPartita[2].text=tempo.ToString();
+            yield return new WaitForSecondsRealtime(DeltaT);}
+        
+        SceneManager.LoadScene("Esito");}                 // Scena finale
 
 //////////////////////////////////////////////// MORTE /////////////////////////////////////////////////////////////////
     public IEnumerator Morte(){
@@ -179,11 +215,16 @@ public class GestorePartita:MonoBehaviour{
         yield return new WaitForSeconds(DeltaCuboVuoto);
         obj.position=posOggetto;
         obj.localScale=scalaOggetto;}
-        
+    
+///////////////////////////////////////////////////// INIZIO SCONTRO ///////////////////////////////////////////////////
+    public void InizioScontro(){
+        foreach(var cubo in cubiDaMettere){                 // Chiude l'ingresso
+            cubo.gameObject.SetActive(true);}}
+
 ///////////////////////////////////////////////////////// UPDATE ///////////////////////////////////////////////////////
     private void Update(){
         if(player.position.x<posMinX || player.position.x>posMaxX){      // Non troppo indietro o avanti
             return;}
-        
+            
         posCamera.x=player.position.x;
         transform.position=posCamera;}}       // Distanza fissa su y e z
