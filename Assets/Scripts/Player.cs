@@ -9,8 +9,8 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private short direzione;
     private bool boolCollisioneCubo,boolInvincibile,boolTerreno,scontroAvviato;
     private Vector2 marioPiccolo,marioGrande;
-    private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill"};
-    private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata"};
+    private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill","Bowser"};
+    private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata","Fuoco"};
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
     [SerializeField] private GestorePartita mainSchermo;

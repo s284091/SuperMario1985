@@ -125,8 +125,16 @@ public class GestorePartita:MonoBehaviour{
         var n=0;
         
         Time.timeScale=0;
+        musica.pitch=1;                         // Blocca tutto
+        musica.Stop();
+        musica.loop=false;
+        
+        while(player.position.y>terra){                                // Mario scende fino a terra
+            yield return new WaitForSecondsRealtime(DeltaT);
+            player.position=new Vector2(player.position.x,player.position.y-DeltaS);}
+        
         posBandiera.RotateAround(posRotazione,Vector3.forward,90);       // Cade l'ascia
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(DeltaT);
         
         while(n<ponte.Length){
             n++;
@@ -137,10 +145,7 @@ public class GestorePartita:MonoBehaviour{
                 ponte[i].position=posObj;}}
         
         yield return new WaitForSecondsRealtime(DeltaAscia);
-        musica.pitch=1;
-        musica.Stop();
-        musica.loop=false;
-        musica.clip=cadeBowser;          // Musichetta morte Bowser
+        musica.clip=cadeBowser;                                    // Musichetta morte Bowser
         musica.Play();
         
         while(bowser.position.y>0){
