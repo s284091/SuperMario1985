@@ -4,7 +4,7 @@ public class PallaInfuocata:MonoBehaviour{                 // Gestisce una palla
     private Rigidbody2D rigidbodyOggetto;
     private SpriteRenderer rendererOggetto;
     private CircleCollider2D colliderOggetto;
-    private Vector2 capovolta;
+    private readonly Vector2 capovolta=new(1,-1);
     [SerializeField] private int velocità;
 
 ////////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////
@@ -12,8 +12,6 @@ public class PallaInfuocata:MonoBehaviour{                 // Gestisce una palla
         rendererOggetto=GetComponent<SpriteRenderer>();
         rigidbodyOggetto=GetComponent<Rigidbody2D>();             // Componenti
         colliderOggetto=GetComponent<CircleCollider2D>();
-        
-        capovolta=new Vector2(1,-1);
         rigidbodyOggetto.linearVelocityY=velocità;}               // Inizializzazione
     
 ///////////////////////////////////////////////////// RIPARTE //////////////////////////////////////////////////////////
@@ -33,6 +31,6 @@ public class PallaInfuocata:MonoBehaviour{                 // Gestisce una palla
         if(nameGameObject=="Pianta"){                        // Solo la pianta conta
              StartCoroutine(Riparte());}
         else{                                                     // Inversione
-             transform.localScale=transform.localScale.y.Equals(1)? capovolta : Vector2.one;
+             transform.localScale=transform.localScale.y>0? capovolta : Vector2.one;
              rigidbodyOggetto.linearVelocityY=-velocità;}}}
                  

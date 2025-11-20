@@ -8,7 +8,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private AudioSource[] audioGame=new AudioSource[3];    // [Salto,PowerUp/Down,Oggetti]
     private short direzione;
     private bool boolCollisioneCubo,boolInvincibile,boolTerreno,scontroAvviato;
-    private Vector2 marioPiccolo,marioGrande;
+    private readonly Vector2 marioPiccolo=new(1,1),marioGrande=new(1.2f,1.5f);
     private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill","Bowser"};
     private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata","Fuoco"};
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
@@ -18,8 +18,6 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     
 ///////////////////////////////////////////////// AWAKE ////////////////////////////////////////////////////////////////
     private void Awake(){
-        marioPiccolo=new Vector2(1,1);                  // Dimensioni
-        marioGrande=new Vector2(1.2f,1.5f);
         input=GetComponent<PlayerInput>();                 // Carica i componenti (stesso GameObject -> GetComponent)
         rendererMario=GetComponent<SpriteRenderer>();
         rigidBodyMario=GetComponent<Rigidbody2D>();

@@ -10,10 +10,8 @@ public class PiattaformaMobile:MonoBehaviour{
     private void Awake(){
         posMax=new Vector2(transform.position.x,AltezzaMassimaVisibile);
         posMin=new Vector2(transform.position.x,AltezzaMinimaVisibile);
-        rigidBodyOggetto=GetComponent<Rigidbody2D>();               // Inizializzazione
-        
-        if(name!="PiattaformaInAvanti"){
-            rigidBodyOggetto.linearVelocityX=velocità;}}
+        rigidBodyOggetto=GetComponent<Rigidbody2D>();                                // Inizializzazione
+        rigidBodyOggetto.linearVelocityY=velocità;}
         
 ///////////////////////////////////////////////////// UPDATE ///////////////////////////////////////////////////////////
     private void Update(){

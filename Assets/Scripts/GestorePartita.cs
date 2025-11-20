@@ -135,11 +135,12 @@ public class GestorePartita:MonoBehaviour{
         
         posBandiera.RotateAround(posRotazione,Vector3.forward,90);       // Cade l'ascia
         yield return new WaitForSecondsRealtime(DeltaT);
+        AggiungiPunti(10000);                // Punti vittoria
         
         while(n<ponte.Length){
             n++;
             yield return new WaitForSecondsRealtime(DeltaS);           // Crolla il ponte
-            for(int i=0;i<n;i++){
+            for(var i=0;i<n;i++){
                 posObj=ponte[i].position;
                 posObj.y-=DeltaPonte;
                 ponte[i].position=posObj;}}
@@ -159,8 +160,7 @@ public class GestorePartita:MonoBehaviour{
         while(musica.isPlaying){
             yield return null;}
         
-        AggiungiPunti(10000);                // Punti vittoria e tempo
-        while(tempo>0){
+        while(tempo>0){                        // Punti tempo
             tempo--;
             AggiungiPunti(50);
             infoPartita[2].text=tempo.ToString();

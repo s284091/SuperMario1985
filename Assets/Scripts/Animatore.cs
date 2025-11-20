@@ -22,14 +22,14 @@ public class Animatore:MonoBehaviour{
             switch(nomeOggetto){
                 case "Pianta":                // Identico comportamento
                 case "Goomba":    
-                    rendererOggetto.sprite=rendererOggetto.sprite==std? camminata:std;
+                    rendererOggetto.sprite=rendererOggetto.sprite==std? camminata : std;
                     tempo=0.5f;
                     break;
                 case "Mario":
                     if(rigidbodyOggetto.linearVelocityX==0 && playerOggetto.GetTerreno()){           // Fermo
                         rendererOggetto.sprite=std;}
                     else if(rigidbodyOggetto.linearVelocityX!=0 && rigidbodyOggetto.linearVelocityY==0){   // Cammina
-                        rendererOggetto.sprite=rendererOggetto.sprite==std? camminata:std;}
+                        rendererOggetto.sprite=rendererOggetto.sprite==std? camminata : std;}
                     tempo=0.2f;
                     break;}
             yield return new WaitForSeconds(tempo);}while(tempo>0);}}
