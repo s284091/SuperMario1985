@@ -13,7 +13,8 @@ public class GestorePartita:MonoBehaviour{
     private static string _nomeLivello="Livello1";
     [SerializeField] private float hMax;
     [SerializeField] private int terra,hSogliaTop;
-    [SerializeField] private Transform posBandiera,player,pausaPanel,bowser;
+    [SerializeField] private Transform posBandiera,pausaPanel;
+    [SerializeField] private Rigidbody2D player,bowser;
     [SerializeField] private Transform[] cubiDaMettere,ponte;
     [SerializeField] private TMP_Text[] infoPartita;
     [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria,cadeBowser;
@@ -76,7 +77,7 @@ public class GestorePartita:MonoBehaviour{
 
 /////////////////////////////////////////////////////// VITTORIA ///////////////////////////////////////////////////////
     public IEnumerator Vittoria(){
-        var h=player.position.y<hMax? player.position.y : hMax;
+        var h=player.transform.position.y<hMax? player.transform.position.y : hMax;
         
         Time.timeScale=0;
         musica.pitch=1;
@@ -95,14 +96,20 @@ public class GestorePartita:MonoBehaviour{
             AggiungiPunti(100);}
         yield return new WaitForSecondsRealtime(0.5f);
         
-        while(posBandiera.position.y<h){                           // La bandiera sale, mario scende
+        while(posBandiera.position.y<h){
             yield return new WaitForSecondsRealtime(DeltaT);
-            player.position=new Vector2(player.position.x,player.position.y-DeltaS);
-            posBandiera.position=new Vector2(posBandiera.position.x,posBandiera.position.y+DeltaS);}
+            posObj=player.transform.position;
+            posObj.y-=DeltaS;
+            player.transform.position=posObj;              // La bandiera sale, mario scende
+            posObj=posBandiera.position;
+            posObj.y+=DeltaS;
+            posBandiera.position=posObj;}
         
-        while(player.position.y>terra){                                // Mario scende fino a terra
+        while(player.transform.position.y>terra){
             yield return new WaitForSecondsRealtime(DeltaT);
-            player.position=new Vector2(player.position.x,player.position.y-DeltaS);}
+            posObj=player.transform.position;
+            posObj.y-=DeltaS;                                                         // Mario scende fino a terra
+            player.transform.position=posObj;}
         
         musica.clip=musicaVittoria;          // Musichetta
         musica.Play();
@@ -129,12 +136,20 @@ public class GestorePartita:MonoBehaviour{
         musica.Stop();
         musica.loop=false;
         
-        while(player.position.y>terra){                                // Mario scende fino a terra
+        while(player.transform.position.y>terra){
             yield return new WaitForSecondsRealtime(DeltaT);
-            player.position=new Vector2(player.position.x,player.position.y-DeltaS);}
+            yield return new WaitForSecondsRealtime(DeltaT);
+            posObj=player.transform.position;
+            posObj.y-=DeltaS;
+            player.transform.position=posObj;}              // Mario scende fino a terra
+        
+        while(bowser.transform.position.y>terra+1){                   // Bowser scende fino a terra
+            yield return new WaitForSecondsRealtime(DeltaT);
+            posObj=bowser.transform.position;
+            posObj.y-=DeltaS;
+            bowser.transform.position=posObj;}
         
         posBandiera.RotateAround(posRotazione,Vector3.forward,90);       // Cade l'ascia
-        yield return new WaitForSecondsRealtime(DeltaT);
         AggiungiPunti(10000);                // Punti vittoria
         
         while(n<ponte.Length){
@@ -145,15 +160,14 @@ public class GestorePartita:MonoBehaviour{
                 posObj.y-=DeltaPonte;
                 ponte[i].position=posObj;}}
         
-        yield return new WaitForSecondsRealtime(DeltaAscia);
         musica.clip=cadeBowser;                                    // Musichetta morte Bowser
         musica.Play();
         
-        while(bowser.position.y>0){
-            yield return new WaitForSecondsRealtime(DeltaS);            // Cade Bowser
-            posObj=bowser.position;
-            posObj.y-=DeltaPonte;
-            bowser.position=posObj;}
+        while(bowser.transform.position.y>0){
+            yield return new WaitForSecondsRealtime(DeltaT);       // Bowser cade
+            posObj=bowser.transform.position;
+            posObj.y-=DeltaS;
+            bowser.transform.position=posObj;}
         
         musica.clip=musicaVittoria;          // Musichetta
         musica.Play();
@@ -170,8 +184,8 @@ public class GestorePartita:MonoBehaviour{
 
 //////////////////////////////////////////////// MORTE /////////////////////////////////////////////////////////////////
     public IEnumerator Morte(){
-        var h=player.position.y+5;
-        var posOggetto=player.position;
+        var h=player.transform.position.y+5;
+        var posOggetto=player.transform.position;
         
         musica.pitch=1;
         Time.timeScale=0;                                             // Non si muove più nulla
@@ -183,14 +197,14 @@ public class GestorePartita:MonoBehaviour{
         if(posOggetto.y>=AltezzaMinimaVisibile){
             while(posOggetto.y<h){
                 yield return new WaitForSecondsRealtime(DeltaT);           // Sale
-                posOggetto.y=player.position.y+DeltaS;
-                player.position=posOggetto;}
+                posOggetto.y=player.transform.position.y+DeltaS;
+                player.transform.position=posOggetto;}
             
             posOggetto.z=-1;                                     // Davanti a tutto
             while(posOggetto.y>AltezzaMinimaVisibile){
                 yield return new WaitForSecondsRealtime(DeltaT);               // Scende
-                posOggetto.y=player.position.y-DeltaS;
-                player.position=posOggetto;}}
+                posOggetto.y=player.transform.position.y-DeltaS;
+                player.transform.position=posOggetto;}}
         
         while(musica.isPlaying){
             yield return null;}                       // Finisce di suonare e cambia scena

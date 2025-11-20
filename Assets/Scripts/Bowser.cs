@@ -11,11 +11,11 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
     private Vector2 posLoad;
     
     private readonly Vector2 capovolto=new(-1,1);
-    private readonly Dictionary<(bool,bool),(int,int)> dizionarioProbabilità=new(){
-        [(true,true)]=(4,9),
-        [(true,false)]=(7,-1),             // Se d>DistanzaMinima -> Se ha fuoco -> PMovimento, PSpara
-        [(false,true)]=(1,-1),
-        [(false,false)]=(2,-1)};
+    private readonly Dictionary<(bool,bool),(int,int)> dizionarioProbabilità=new(){     // range(0,9) compresi
+        [(true,true)]=(3,9),             // 40% si muove, 60% spara, 0% salta
+        [(true,false)]=(7,-1),           // 80% si muove, 0% spara, 20% salta
+        [(false,true)]=(1,5),            // 20% si muove, 40% spara, 40% salta
+        [(false,false)]=(2,-1)};         // 30% si muove, 0% spara, 70% salta
     
     private const int LoadX=4,TempoLoadY=1,DistanzaMinima=5,VelocitàX=-4,VelocitàY=10,DimP=10;
     [SerializeField] private Rigidbody2D[] palleDiFuoco;
@@ -32,6 +32,11 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
 ///////////////////////////////////////////////////// VISIBILE /////////////////////////////////////////////////////////
     private void OnBecameVisible(){
         StartCoroutine(Agisci());}                // Parte
+    
+//////////////////////////////////////////////////// SPARA FUOCO ///////////////////////////////////////////////////////
+    private void SparaFuoco(){                  // Attiva la palla in posizione indiceFuoco
+        Debug.Log("SparaFuoco");
+        palleDiFuoco[indiceFuoco].gameObject.SetActive(true);}
     
 ////////////////////////////////////////////////// AGISCE //////////////////////////////////////////////////////////////
     private IEnumerator Agisci(){
@@ -51,7 +56,7 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
                     rigidbodyBowser.linearVelocityX=transform.localScale.x*VelocitàX;}     // Si muove
                 else if(azione<=maxSpara){
                     rigidbodyBowser.linearVelocityX=0;                // Prima si ferma
-                    /*SparaFuoco();*/}
+                    SparaFuoco();}
                 else{
                     rigidbodyBowser.linearVelocityX=0;
                     rigidbodyBowser.linearVelocityY=VelocitàY;}}                        // Salta

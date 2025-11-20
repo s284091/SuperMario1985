@@ -21,7 +21,7 @@ public class PallaInfuocata:MonoBehaviour{                 // Gestisce una palla
         yield return new WaitForSeconds(1);
         rendererOggetto.enabled=true;
         colliderOggetto.enabled=true;
-        transform.localScale=transform.localScale.y.Equals(1)? capovolta : Vector2.one;
+        transform.localScale=transform.localScale.y>0? capovolta : Vector2.one;
         rigidbodyOggetto.linearVelocityY=velocità;}           // Riparte dopo 1 sec
         
 //////////////////////////////////////////////////// COLLISIONE ////////////////////////////////////////////////////////
