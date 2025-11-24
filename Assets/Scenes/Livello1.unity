@@ -8112,7 +8112,7 @@ MonoBehaviour:
   hSogliaTop: 11
   posBandiera: {fileID: 1891724648}
   pausaPanel: {fileID: 1228551114}
-  player: {fileID: 400378006}
+  player: {fileID: 400378005}
   bowser: {fileID: 0}
   cubiDaMettere: []
   ponte: []

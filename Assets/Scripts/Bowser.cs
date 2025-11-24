@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
 public class Bowser:MonoBehaviour{                               // Gestisce Bowser
     private int azione,indiceFuoco,maxMovimento,maxSpara;
     private float diffPosizioni;
     private Rigidbody2D rigidbodyBowser;
-    private Vector2 posLoad;
+    private Vector2 posLoad,scalaLoad;
     
     private readonly Vector2 capovolto=new(-1,1);
     private readonly Dictionary<(bool,bool),(int,int)> dizionarioProbabilità=new(){     // range(0,9) compresi
@@ -17,16 +16,14 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
         [(false,true)]=(1,5),            // 20% si muove, 40% spara, 40% salta
         [(false,false)]=(2,-1)};         // 30% si muove, 0% spara, 70% salta
     
-    private const int LoadX=4,TempoLoadY=1,DistanzaMinima=5,VelocitàX=-4,VelocitàY=10,DimP=10;
+    private const int LoadX=3,TempoLoadY=1,DistanzaMinima=5,VelocitàX=-4,VelocitàY=10,DimP=10,PosMinX=250;
     [SerializeField] private Rigidbody2D[] palleDiFuoco;
     [SerializeField] private Transform mario;
     
 ////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////////    
     private void Awake(){
         posLoad=Vector2.zero;
-        
-        /*foreach(var fuoco in palleDiFuoco){
-            fuoco.linearVelocity=2*Vector2.one;}*/
+        scalaLoad=Vector2.one;
         rigidbodyBowser=GetComponent<Rigidbody2D>();}              // Inizializzazione
     
 ///////////////////////////////////////////////////// VISIBILE /////////////////////////////////////////////////////////
@@ -34,9 +31,21 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
         StartCoroutine(Agisci());}                // Parte
     
 //////////////////////////////////////////////////// SPARA FUOCO ///////////////////////////////////////////////////////
-    private void SparaFuoco(){                  // Attiva la palla in posizione indiceFuoco
-        Debug.Log("SparaFuoco");
-        palleDiFuoco[indiceFuoco].gameObject.SetActive(true);}
+    public void SparaFuoco(){                  // Attiva la palla in posizione indiceFuoco
+        posLoad.x=transform.position.x-LoadX*transform.localScale.x;
+        posLoad.y=transform.position.y-TempoLoadY;
+        palleDiFuoco[indiceFuoco].transform.position=posLoad;           // Posizione
+        
+        scalaLoad.x=transform.localScale.x;
+        palleDiFuoco[indiceFuoco].transform.localScale=scalaLoad;       // Scala
+        
+        palleDiFuoco[indiceFuoco].gameObject.SetActive(true);
+        palleDiFuoco[indiceFuoco].linearVelocityX=transform.localScale.x*VelocitàX;        // Velocità
+
+        StartCoroutine(CancellaFuoco(indiceFuoco));}   // Toglie il fuoco (passa l'indice)
+    private IEnumerator CancellaFuoco(int indice){
+        yield return new WaitForSeconds(DimP);               // Attende per 10 secondi e la toglie
+        palleDiFuoco[indice].gameObject.SetActive(false);}
     
 ////////////////////////////////////////////////// AGISCE //////////////////////////////////////////////////////////////
     private IEnumerator Agisci(){
@@ -53,7 +62,10 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
                 (maxMovimento,maxSpara)=dizionarioProbabilità[(diffPosizioni>DistanzaMinima,indiceFuoco>=0)];
                 
                 if(azione<=maxMovimento){
-                    rigidbodyBowser.linearVelocityX=transform.localScale.x*VelocitàX;}     // Si muove
+                    if(transform.localScale.x>0){                    // Mario -> Bowser -> Ascia
+                        rigidbodyBowser.linearVelocityX=transform.position.x>PosMinX? VelocitàX : -VelocitàX;}
+                    else{
+                        rigidbodyBowser.linearVelocityX=-VelocitàX;}}             // Mi insegue
                 else if(azione<=maxSpara){
                     rigidbodyBowser.linearVelocityX=0;                // Prima si ferma
                     SparaFuoco();}

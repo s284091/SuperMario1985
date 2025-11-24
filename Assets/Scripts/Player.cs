@@ -10,7 +10,7 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
     private bool boolCollisioneCubo,boolInvincibile,boolTerreno,scontroAvviato;
     private readonly Vector2 marioPiccolo=new(1,1),marioGrande=new(1.2f,1.5f);
     private readonly string[] nemiciMobili={"Goomba","Koopa","BulletBill"};
-    private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata","Fuoco"};
+    private readonly string[] nemiciDiFuoco={"PallaDiFuoco","LanciaFiamme","BarraInfuocata"};
     private const int NLampeggi=6,FattoreSpostamento=10,FattoreSalto=30,AltezzaMinimaVisibile=3;
     [SerializeField] private Sprite marioSalta,marioMorto;
     [SerializeField] private GestorePartita mainSchermo;
@@ -94,13 +94,16 @@ public class Player:MonoBehaviour{                         // Gestisce i movimen
         else if(nameObject=="Pianta" && !boolInvincibile){
             SwitchPowerUp(false);}                      // Colpito da pianta (rischio di 2 assieme)
         else if(nemiciDiFuoco.Contains(nameObject)){
-            SwitchPowerUp(false);}                       // Palla di fuoco o lanciafiamme o barra
+            SwitchPowerUp(false);}                       // Palla di fuoco o lanciafiamme o barra (non sparisce)
         else if(nameObject=="Asta"){
             StartCoroutine(mainSchermo.Vittoria());}
         else if(nameObject=="Ascia"){
             StartCoroutine(mainSchermo.VittoriaFinale());}           // Fine livello
         else if(nameObject=="Bowser"){
             SwitchPowerUp(false);}
+        else if(nameObject=="Fuoco"){
+            SwitchPowerUp(false);
+            collisione.gameObject.SetActive(false);}             // La palla di Bowser scompare
         
         //// ASSE X
         else if(Mathf.Abs(posYCollider-transform.position.y)<1 && nemiciMobili.Contains(nameObject)){
