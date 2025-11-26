@@ -23,15 +23,16 @@ public class GestorePartita:MonoBehaviour{
     private void Awake(){
         var cam=GetComponent<Camera>();                   // Componenti
         
-        musica=GetComponents<AudioSource>()[1];
         Time.timeScale=1;                                      // Azzerato alla morte
+        musica=GetComponents<AudioSource>()[1];
         infoPartita[0].text=_punti.ToString();                // Punti
         infoPartita[3].text=_vite.ToString();                // Vite (10 o rimanenti)
         
         posMinX=player.position.x+cam.orthographicSize*cam.aspect-0.5f;         // 0.5 per inquadrare tutto l'oggetto
         posMaxX=posBandiera.position.x-cam.orthographicSize*cam.aspect+1.5f;    // 1.5 per inquadrare tutto l'oggetto
-        StartCoroutine(TimerPartita());                 // Avvio timer
         posCamera=new Vector3(posMinX,9.2f,-9);
+        
+        StartCoroutine(TimerPartita());                 // Avvio timer
         transform.position=posCamera;}      // Posizione iniziale
     
 //////////////////////////////////////////// INFO PER SCHERMI FINE /////////////////////////////////////////////////////
@@ -105,7 +106,7 @@ public class GestorePartita:MonoBehaviour{
             posObj.y+=DeltaS;
             posBandiera.position=posObj;}
         
-        while(player.position.y>terra){
+        while(player.position.y>terra+player.localScale.y/2-DeltaS){
             yield return new WaitForSecondsRealtime(DeltaT);
             posObj=player.position;
             posObj.y-=DeltaS;                                                         // Mario scende fino a terra
@@ -136,7 +137,7 @@ public class GestorePartita:MonoBehaviour{
         musica.Stop();
         musica.loop=false;
         
-        while(player.position.y>terra){
+        while(player.position.y>terra+player.localScale.y/2-DeltaS){
             yield return new WaitForSecondsRealtime(DeltaT);
             yield return new WaitForSecondsRealtime(DeltaT);
             posObj=player.position;

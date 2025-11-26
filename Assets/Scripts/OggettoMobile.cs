@@ -20,6 +20,9 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
             
 ////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////////
     private void OnCollisionEnter2D(Collision2D collision){  
+        if(!collision.gameObject.activeSelf){                        // Evita cose strane
+            return;}
+        
         if(nomeGo=="BulletBill"){                       // Il bullet esplode se si schianta
             if(transform.localScale.x>1 && collision.gameObject.name.Contains("CuboDistruttibileBill")){
                 collision.gameObject.SetActive(false);}
