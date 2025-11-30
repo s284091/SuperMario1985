@@ -3419,6 +3419,7 @@ MonoBehaviour:
   musicaStd: {fileID: 8300000, guid: d1a94d7df27ab2b49808161ea1b1456d, type: 3}
   musicaVittoria: {fileID: 8300000, guid: ab3b13b867180ba48ad512ac569e6aeb, type: 3}
   cadeBowser: {fileID: 8300000, guid: b64030cd484345541a963b801d10a295, type: 3}
+  vitaExtra: {fileID: 8300000, guid: 4d93f0931ef90ee45ad806319254da0b, type: 3}
 --- !u!114 &81672400
 MonoBehaviour:
   m_ObjectHideFlags: 0

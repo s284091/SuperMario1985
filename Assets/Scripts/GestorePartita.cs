@@ -18,7 +18,7 @@ public class GestorePartita:MonoBehaviour{
     [SerializeField] private Bowser bowser;
     [SerializeField] private Transform[] cubiDaMettere,ponte;
     [SerializeField] private TMP_Text[] infoPartita;
-    [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria,cadeBowser;
+    [SerializeField] private AudioClip morte,pochiSecondi,musicaStd,musicaVittoria,cadeBowser,vitaExtra;
     
 ////////////////////////////////////////////////// AWAKE ///////////////////////////////////////////////////////////////
     private void Awake(){
@@ -183,6 +183,15 @@ public class GestorePartita:MonoBehaviour{
             AggiungiPunti(50);
             infoPartita[2].text=tempo.ToString();
             yield return new WaitForSecondsRealtime(DeltaT);}
+        
+        musica.clip=vitaExtra;
+        while(_vite>0){
+            _vite--;                                     // Vita -> 1000 pt
+            infoPartita[3].text=_vite.ToString();
+            AggiungiPunti(1000);                   // Per ogni vita
+            musica.Play();
+            while(musica.isPlaying){
+                yield return null;}}                 // Suona
         
         SceneManager.LoadScene("Esito");}                 // Scena finale
 
