@@ -30,7 +30,7 @@ public class PallaInfuocata:MonoBehaviour{                 // Gestisce una palla
         
         if(nameGameObject=="Pianta"){                        // Solo la pianta conta
              StartCoroutine(Riparte());}
-        else{                                                     // Inversione
+        else if(nameGameObject!="Mario"){                                                     // Inversione
              transform.localScale=transform.localScale.y>0? capovolta : Vector2.one;
              rigidbodyOggetto.linearVelocityY=-velocità;}}}
                  

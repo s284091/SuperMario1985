@@ -4,6 +4,7 @@ public class OggettoConFuoco:MonoBehaviour{                 // Gestisce i lancia
     private bool ruota;
     private CapsuleCollider2D colliderOggetto;
     private SpriteRenderer rendererOggetto;
+    private const float Tempo=1.5f,TempoRotazione=0.005f;
     [SerializeField] private float versoRotazione;
     [SerializeField] private Vector2 puntoFisso;
     
@@ -16,11 +17,11 @@ public class OggettoConFuoco:MonoBehaviour{                 // Gestisce i lancia
     
 ///////////////////////////////////////////// COROUTINE MOVIMENTO //////////////////////////////////////////////////////
     private IEnumerator Opera(){           // Se ruota=true è barra rotante (finché esiste)
-        while(Time.timeScale>0){
+        while(rendererOggetto){
             if(ruota){
                 transform.RotateAround(puntoFisso,Vector3.forward,versoRotazione);   // Ruota
-                yield return null;}
+                yield return new WaitForSeconds(TempoRotazione);}
             else{                                                    // Sennò è lanciafiamme temporizzato
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(Tempo);
                 rendererOggetto.enabled=!rendererOggetto.enabled;
                 colliderOggetto.enabled=!colliderOggetto.enabled;}}}}                 // Stop/Via

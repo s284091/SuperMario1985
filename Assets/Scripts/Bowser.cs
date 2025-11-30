@@ -43,7 +43,7 @@ public class Bowser:MonoBehaviour{                               // Gestisce Bow
     
 ////////////////////////////////////////////////// AGISCE //////////////////////////////////////////////////////////////
     private IEnumerator Agisci(){
-        while(Time.timeScale>0){
+        while(azione>=0){
             if(mario.position.x>transform.position.x && transform.localScale.x>0){           // Si gira verso di me
                 transform.localScale=capovolto;}
             else if(mario.position.x<transform.position.x && transform.localScale.x<0){

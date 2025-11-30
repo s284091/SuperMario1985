@@ -17,7 +17,7 @@ public class GestoreSchermate:MonoBehaviour{
             StartCoroutine(AnimazioneVite());}            // Scena vita in meno
         else if(nomeScena=="Esito"){
             puntiFinali.text=GestorePartita.GetPunti().ToString();
-            exit.onClick.AddListener(()=>SceneManager.LoadScene("Intro"));}         // Scena vittoria
+            exit.onClick.AddListener(()=>Handler(-1));}         // Scena vittoria
         else if(nomeScena=="Intro"){
             play.onClick.AddListener(()=>SceneManager.LoadScene("Livello1"));        // Inizio
             quit.onClick.AddListener(()=>{Application.Quit(1);});
@@ -25,13 +25,17 @@ public class GestoreSchermate:MonoBehaviour{
             noQuit.onClick.AddListener(()=>Handler(2));}
         else if(nomeScena.Contains("Livello")){
             play.onClick.AddListener(()=>Handler(0));
-            quit.onClick.AddListener(()=>{SceneManager.LoadScene("Intro");});      // Livello
+            quit.onClick.AddListener(()=>{Handler(-1);});      // Livello
             exit.onClick.AddListener(()=>Handler(1)); 
             noQuit.onClick.AddListener(()=>Handler(2));}}
     
 ////////////////////////////////////////////// HANDLER /////////////////////////////////////////////////////////////////
     private void Handler(int n){
         switch(n){
+            case -1:                                       // Ricomincia
+                GestorePartita.RestoreVite();
+                SceneManager.LoadScene("Intro");
+                break;
             case 0:
                 Time.timeScale=1;
                 panel.gameObject.SetActive(false);                // Fine pausa

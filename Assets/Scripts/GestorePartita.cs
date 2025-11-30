@@ -13,7 +13,8 @@ public class GestorePartita:MonoBehaviour{
     private static string _nomeLivello="Livello1";
     [SerializeField] private float hMax;
     [SerializeField] private int terra,hSogliaTop;
-    [SerializeField] private Transform posBandiera,pausaPanel,player;
+    [SerializeField] private SpriteRenderer player;
+    [SerializeField] private Transform posBandiera,pausaPanel;
     [SerializeField] private Bowser bowser;
     [SerializeField] private Transform[] cubiDaMettere,ponte;
     [SerializeField] private TMP_Text[] infoPartita;
@@ -28,8 +29,8 @@ public class GestorePartita:MonoBehaviour{
         infoPartita[0].text=_punti.ToString();                // Punti
         infoPartita[3].text=_vite.ToString();                // Vite (10 o rimanenti)
         
-        posMinX=player.position.x+cam.orthographicSize*cam.aspect-0.5f;         // 0.5 per inquadrare tutto l'oggetto
-        posMaxX=posBandiera.position.x-cam.orthographicSize*cam.aspect+1.5f;    // 1.5 per inquadrare tutto l'oggetto
+        posMinX=player.gameObject.transform.position.x+cam.orthographicSize*cam.aspect-0.5f;
+        posMaxX=posBandiera.position.x-cam.orthographicSize*cam.aspect+1.5f;  // 0.5/1.5 per inquadrare tutto l'oggetto
         posCamera=new Vector3(posMinX,9.2f,-9);
         
         StartCoroutine(TimerPartita());                 // Avvio timer
@@ -49,7 +50,7 @@ public class GestorePartita:MonoBehaviour{
         _punti=0;
         return n;}
     public static string GetLivello(){
-        return  _nomeLivello;}
+        return _nomeLivello;}
     
 ///////////////////////////////////////////////////// TIMER ////////////////////////////////////////////////////////////
     private IEnumerator TimerPartita(){
@@ -78,8 +79,9 @@ public class GestorePartita:MonoBehaviour{
 
 /////////////////////////////////////////////////////// VITTORIA ///////////////////////////////////////////////////////
     public IEnumerator Vittoria(){
-        var h=player.position.y<hMax? player.position.y : hMax;
+        var h=player.gameObject.transform.position.y<hMax? player.gameObject.transform.position.y : hMax;
         
+        player.enabled=true;                       // Stop
         Time.timeScale=0;
         musica.pitch=1;
         musica.Stop();
@@ -99,18 +101,18 @@ public class GestorePartita:MonoBehaviour{
         
         while(posBandiera.position.y<h){
             yield return new WaitForSecondsRealtime(DeltaT);
-            posObj=player.position;
+            posObj=player.gameObject.transform.position;
             posObj.y-=DeltaS;
-            player.position=posObj;              // La bandiera sale, mario scende
+            player.gameObject.transform.position=posObj;              // La bandiera sale, mario scende
             posObj=posBandiera.position;
             posObj.y+=DeltaS;
             posBandiera.position=posObj;}
         
-        while(player.position.y>terra+player.localScale.y/2-DeltaS){
+        while(player.gameObject.transform.position.y>terra+player.gameObject.transform.localScale.y/2-DeltaS){
             yield return new WaitForSecondsRealtime(DeltaT);
-            posObj=player.position;
+            posObj=player.gameObject.transform.position;
             posObj.y-=DeltaS;                                                         // Mario scende fino a terra
-            player.position=posObj;}
+            player.gameObject.transform.position=posObj;}
         
         musica.clip=musicaVittoria;          // Musichetta
         musica.Play();
@@ -122,7 +124,7 @@ public class GestorePartita:MonoBehaviour{
             AggiungiPunti(50);
             infoPartita[2].text=tempo.ToString();
             yield return new WaitForSecondsRealtime(DeltaT);}
-        _puntiPrecedenti+=_punti;                  // Punti=somma
+        _puntiPrecedenti=_punti;                  // Punti
          
         _nomeLivello=_nomeLivello=="Livello1"? "Livello2" : "Livello3";            // Prossimo elemento
         yield return new WaitForSecondsRealtime(1);
@@ -132,17 +134,18 @@ public class GestorePartita:MonoBehaviour{
         var posRotazione=new Vector2(posBandiera.position.x,posBandiera.position.y-DeltaAscia);
         var n=0;
         
+        player.enabled=true;                       // Stop
         Time.timeScale=0;
         musica.pitch=1;                         // Blocca tutto
         musica.Stop();
         musica.loop=false;
         
-        while(player.position.y>terra+player.localScale.y/2-DeltaS){
+        while(player.gameObject.transform.position.y>terra+player.gameObject.transform.localScale.y/2-DeltaS){
             yield return new WaitForSecondsRealtime(DeltaT);
             yield return new WaitForSecondsRealtime(DeltaT);
-            posObj=player.position;
+            posObj=player.gameObject.transform.position;
             posObj.y-=DeltaS;
-            player.position=posObj;}              // Mario scende fino a terra
+            player.gameObject.transform.position=posObj;}              // Mario scende fino a terra
         
         while(bowser.transform.position.y>terra+1){                   // Bowser scende fino a terra
             yield return new WaitForSecondsRealtime(DeltaT);
@@ -185,9 +188,10 @@ public class GestorePartita:MonoBehaviour{
 
 //////////////////////////////////////////////// MORTE /////////////////////////////////////////////////////////////////
     public IEnumerator Morte(){
-        var h=player.position.y+5;
-        var posOggetto=player.position;
+        var posOggetto=player.gameObject.transform.position;
+        var h=posOggetto.y+5;
         
+        player.enabled=true;                       // Stop
         musica.pitch=1;
         Time.timeScale=0;                                             // Non si muove più nulla
         musica.clip=morte;           // Suono morte
@@ -198,14 +202,14 @@ public class GestorePartita:MonoBehaviour{
         if(posOggetto.y>=AltezzaMinimaVisibile){
             while(posOggetto.y<h){
                 yield return new WaitForSecondsRealtime(DeltaT);           // Sale
-                posOggetto.y=player.position.y+DeltaS;
-                player.position=posOggetto;}
+                posOggetto.y=player.gameObject.transform.position.y+DeltaS;
+                player.gameObject.transform.position=posOggetto;}
             
             posOggetto.z=-1;                                     // Davanti a tutto
             while(posOggetto.y>AltezzaMinimaVisibile){
                 yield return new WaitForSecondsRealtime(DeltaT);               // Scende
-                posOggetto.y=player.position.y-DeltaS;
-                player.position=posOggetto;}}
+                posOggetto.y=player.gameObject.transform.position.y-DeltaS;
+                player.gameObject.transform.position=posOggetto;}}
         
         while(musica.isPlaying){
             yield return null;}                       // Finisce di suonare e cambia scena
@@ -245,8 +249,8 @@ public class GestorePartita:MonoBehaviour{
 
 ///////////////////////////////////////////////////////// UPDATE ///////////////////////////////////////////////////////
     private void Update(){
-        if(player.position.x<posMinX || player.position.x>posMaxX){      // Non troppo indietro o avanti
-            return;}
+        if(player.gameObject.transform.position.x<posMinX || player.gameObject.transform.position.x>posMaxX){
+            return;}                           // Non troppo indietro o avanti
             
-        posCamera.x=player.position.x;
+        posCamera.x=player.gameObject.transform.position.x;
         transform.position=posCamera;}}       // Distanza fissa su y e z

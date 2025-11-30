@@ -3323,6 +3323,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 704169320}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &137375503
 GameObject:
   m_ObjectHideFlags: 0
@@ -8110,9 +8111,9 @@ MonoBehaviour:
   hMax: 11.5
   terra: 7
   hSogliaTop: 11
+  player: {fileID: 400378003}
   posBandiera: {fileID: 1891724648}
   pausaPanel: {fileID: 1228551114}
-  player: {fileID: 400378005}
   bowser: {fileID: 0}
   cubiDaMettere: []
   ponte: []
@@ -8653,6 +8654,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 1981364848}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &334486523
 GameObject:
   m_ObjectHideFlags: 0
@@ -10238,6 +10240,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 103783837}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &398204709
 GameObject:
   m_ObjectHideFlags: 0
@@ -11564,6 +11567,7 @@ MonoBehaviour:
   audioCamera: {fileID: 0}
   oggettoNascosto: {fileID: 1586408010}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &459935061
 GameObject:
   m_ObjectHideFlags: 0
@@ -15420,6 +15424,7 @@ MonoBehaviour:
   audioCamera: {fileID: 0}
   oggettoNascosto: {fileID: 619438039}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &601591583
 GameObject:
   m_ObjectHideFlags: 0
@@ -24259,6 +24264,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 1200803097}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &986432013
 GameObject:
   m_ObjectHideFlags: 0
@@ -27457,6 +27463,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 1856249251}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &1162055242
 GameObject:
   m_ObjectHideFlags: 0
@@ -37647,6 +37654,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 614250918}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &1702200294
 GameObject:
   m_ObjectHideFlags: 0
@@ -48211,6 +48219,7 @@ MonoBehaviour:
   audioCamera: {fileID: 330585552}
   oggettoNascosto: {fileID: 1517820028}
   cuboVuoto: {fileID: 21300000, guid: df96a8e988385724fab3bb97cfebac9e, type: 3}
+  cameraPartita: {fileID: 330585551}
 --- !u!1 &2142424488
 GameObject:
   m_ObjectHideFlags: 0

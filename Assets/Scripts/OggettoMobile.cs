@@ -20,6 +20,8 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
             
 ////////////////////////////////////////////// COLLISIONI //////////////////////////////////////////////////////////////
     private void OnCollisionEnter2D(Collision2D collision){  
+        var nameGameObject=collision.gameObject.name.Split()[0];            // No numero
+        
         if(!collision.gameObject.activeSelf){                        // Evita cose strane
             return;}
         
@@ -28,6 +30,6 @@ public class OggettoMobile:MonoBehaviour{                 // Gestisce un qualsia
                 collision.gameObject.SetActive(false);}
             else{
                 gameObject.SetActive(false);}}
-        else if(Mathf.Abs(collision.transform.position.y-transform.position.y)<1){    // |Y1-Y2|<1 -> stesso piano
+        else if(Mathf.Abs(collision.transform.position.y-transform.position.y)<1 && nameGameObject!="Mario"){
             velocità=-velocità;
             rendererOggetto.flipX=!rendererOggetto.flipX;}}}
